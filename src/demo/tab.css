@@ -38,24 +38,45 @@
     width: 100%;
     background-color: #e5e5e5;
     height: 200px;
+    position: relative;
 }
-.TabContent .timebox{
-    background-color: burlywood;
+.content {
+    position: relative;
+    width: 300px;
+    height: 100px;
+    margin: auto;
+}
+.content h3 {
+    position: absolute; 
+    /* transform: translateY(-100px);
+    transition: all .5s ease-in-out;
+    transition-delay: 1s; */
+    top: 100px;
+    opacity: 0;
+    animation: inbox 1s ease-in-out 1s forwards;
+}
+.content .sub {
     position: absolute;
-    width: 100px;
+    top: 500px;
+    transform: translateY(-450px);
+    transition: all 1s ease-in-out;
+    transition-delay: 1.2s;
+}
+.content .des {
+    position: absolute;
     left: 500px;
-    transition: all 2s ease-in-out;
+    top: 100px;
+    transform: translateX(-400px);
+    transition: all 1s ease-in-out;
+    transition-delay: 1.4s;
 }
-.TabContent .likebox{
-    background-color: rgb(212, 112, 112);
-    position: absolute;
-    width: 100px;
-    right: 100px;
-    transition: all 2s ease-in-out;
-}
-.TabContent  .timebox  {
-    transform: translateX(-100px);  
-} 
-.TabContent  .likebox  {
-    transform: translateX(-100px);  
+
+@keyframes inbox {
+    from {
+        top: 100px
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
 }

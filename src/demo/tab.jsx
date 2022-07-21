@@ -29,10 +29,29 @@ export default class tab extends Component {
               })
           }
         </div>
-        <div className={`TabContent ${this.state.active === '时间' ? 'time' : ' '}`}>
-          {
-            this.state.active === '时间' ? <div className={`timebox`}> 1</div> : <div className='likebox'> 2</div>
-          }
+        <div className={`TabContent `}>
+           {
+             this.state.active === '时间' ? 
+             <div className='content'>
+                <h3 className='title'>
+                  这是一段文字111111
+                </h3>
+                <p className='sub'>这是一段描述111111</p>
+                <span className='des'>
+                  这是一段描述111111
+                </span>
+             </div>
+             :
+             <div>
+                <h3>
+                  这是一段文字22222
+                </h3>
+                <p>这是一段描述22222</p>
+                <span>
+                  这是一段描述222222
+                </span>
+             </div>
+           }
         </div>
       </>
     )
