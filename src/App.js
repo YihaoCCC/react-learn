@@ -3,6 +3,7 @@ import './App.css';
 import classNames from 'classnames';
 import TestComponent from './learn/component';
 import Comments from './demo/comments';
+import Tab from './demo/tab'
 import Todo from './demo/todo';
 import { useEffect } from 'react';
 const testclass= {
@@ -50,6 +51,7 @@ function App() {
         } */}
         <TestComponent/>
         <Todo></Todo>
+        <Tab></Tab>
       </header>
       
     </div>

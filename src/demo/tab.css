@@ -1,0 +1,61 @@
+.TabBox {
+    width: 100%;
+    font-size: 16px;
+    color: aliceblue;
+    height: 50px;
+}
+
+.TabBox li {
+    display: inline-block;
+    padding: 10px 10px;
+    margin: 0 2px;
+    
+    border-bottom: 2px solid #fff;
+    cursor: pointer;
+    transition: all .5s ease-in-out; 
+}
+
+.TabBox li:hover {
+    font-size: 17px;
+    transform: translateY(-10px);
+    
+}
+.TabBox li span {
+    color: yellow;
+    transition: all .5s;
+}
+.TabBox li:hover span{
+    color: aquamarine;
+    
+}
+.time {
+    color: yellow ;
+}
+
+.TabContent {
+    margin: 10px 0;
+    color: #666;
+    width: 100%;
+    background-color: #e5e5e5;
+    height: 200px;
+}
+.TabContent .timebox{
+    background-color: burlywood;
+    position: absolute;
+    width: 100px;
+    left: 500px;
+    transition: all 2s ease-in-out;
+}
+.TabContent .likebox{
+    background-color: rgb(212, 112, 112);
+    position: absolute;
+    width: 100px;
+    right: 100px;
+    transition: all 2s ease-in-out;
+}
+.TabContent  .timebox  {
+    transform: translateX(-100px);  
+} 
+.TabContent  .likebox  {
+    transform: translateX(-100px);  
+}
