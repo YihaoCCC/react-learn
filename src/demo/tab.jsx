@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './tab.css'
+import tabstyle from './tab.module.css'
 
 export default class tab extends Component {
     state = {
@@ -14,7 +14,8 @@ export default class tab extends Component {
     render() {
     return (
       <>
-        <div className='TabBox'>
+
+        <div className={tabstyle.TabBox}>
           {
               this.state.tab.map((item) => {
                   return (
@@ -29,10 +30,10 @@ export default class tab extends Component {
               })
           }
         </div>
-        <div className={`TabContent `}>
+        <div className={tabstyle.TabContent}>
            {
              this.state.active === '时间' ? 
-             <div className='content'>
+              <div className={tabstyle.content}>
                 <h3 className='title'>
                   这是一段文字111111
                 </h3>
@@ -44,7 +45,7 @@ export default class tab extends Component {
              :
              <div>
                 <h3>
-                  这是一段文字22222
+                  {localStorage.getItem('test')}
                 </h3>
                 <p>这是一段描述22222</p>
                 <span>
