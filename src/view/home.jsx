@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Outlet } from 'react-router-dom'
 export default function Home () {
     
     let [counte,setCounte] = useState(0)
@@ -24,6 +25,8 @@ export default function Home () {
             <button onClick={goAbout}>去关于</button>
             <button onClick={add}>home+1</button>
             home: {counte}
+            <p>子路由组件</p>
+            <Outlet></Outlet>
         </div>
 
     )
