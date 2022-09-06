@@ -29,9 +29,15 @@ class Todo {
         console.log(this.todoList[0].isFinish)
     }
 
-    get getFinishedTodo() {
-        this.todoList.filter(item => item.isFinish)
+    getFinishedTodo (type)  { 
+        console.log(type)
+        return type === 'finish' ?  this.todoList.filter(item => item.isFinish) : this.todoList.filter(item => !item.isFinish)    
+        // return newList
+        // this.todoList = this.todoList.filter(item => !item.isFinish)
     }
+
+
+    
 }
 
 export default Todo
