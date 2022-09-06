@@ -1,0 +1,59 @@
+.content {
+    width: 50%;
+    height: 50vh;
+    margin: auto;
+    background-color: cadetblue;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px 25px;
+    border-radius: 20px;
+    background-color: rgb(29, 29, 29);
+    h1 {
+        color: #fff;
+        text-align: center;
+    }
+    .todo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        .leftContent {
+            width: 20%;
+            button {
+                display: block;
+                margin: auto;
+                margin-bottom: 30px;
+            }
+        }
+        .rightContent {
+            width: 78%;
+            color: #fff;
+            .todoItem {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin: 0 0 15px 0;
+                input {
+                    border-radius: 50%;
+                }
+                .itemBox {
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 20px;
+                    p {
+                        margin: 0 0 10px 0;
+                    }
+                    .sub {
+                        
+                    }
+                }
+            }
+        }
+    }
+    .addTodo {
+        width: 100%;
+        text-align: end;
+    }
+}

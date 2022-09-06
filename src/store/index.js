@@ -1,8 +1,9 @@
 // 1:import correlation component
 
 import React from "react"
-import counterStroe from "./conterStore"
+import counterStroe from "./counterStore"
 import taskStore from './taskStore'
+import Todo from "./todoStore"
 
 // 2:create store class
 
@@ -12,6 +13,7 @@ class RootStroe {
     constructor() {
         this.counterStroe = counterStroe
         this.taskStore = taskStore
+        this.todoStore = new Todo()
     }
 }
 
@@ -19,3 +21,9 @@ class RootStroe {
 const rootStore = new RootStroe()
 // 5：introduce React.createContext to make rooteStore 
 const context = React.createContext(rootStore)
+
+const useStore = () => React.useContext(context)
+
+export default useStore
+
+// export default rootStore
