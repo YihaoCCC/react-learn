@@ -54,28 +54,34 @@ function Todo () {
                 <h1>My-Todo</h1>
                 <div className='todo'>
                     <div className='leftContent'>
-                        <button onClick={getAll}> 全部 </button>
-                        <button onClick={getFinish}> 已完成 </button>
-                        <button onClick={getUnFinish}> 未完成 </button>
+                        <button onClick={getAll}><span>全部</span><i></i></button>
+                        <button onClick={getFinish}> <span>已完成</span><i></i> </button>
+                        <button onClick={getUnFinish}> <span>未完成</span><i></i> </button>
                     </div>
                     <div className='rightContent'>
                         {  
                             TodoList.length !== 0 ?  TodoList.map((item,index) => {
                                 return (
                                     <div className='todoItem' key={index}>
-                                        <input type="checkbox" checked={item.isFinish} onChange={() => todoStore.changeStatus(item.id)}/>
-                                        <div className='itemBox'>
-                                            <p>{item.content}</p>
-                                            <div className="sub">
-                                                {item.name}
-                                                <span>
-                                                    {item.time}
-                                                </span>                    
+                                        <div className='itemLeft'>
+                                            <input type="checkbox" checked={item.isFinish} onChange={() => todoStore.changeStatus(item.id)}/>
+                                            <div className='itemBox'>
+                                                <p>{item.content}</p>
+                                                <div className="sub">
+                                                    {item.name}
+                                                    <span>
+                                                        {item.time}
+                                                    </span>                    
+                                                </div>
                                             </div>
                                         </div>
-                                        <button className='delete' onClick={() => deleteTodo(item.id)}>
-                                            删除
-                                        </button>
+                                        <div className="delete">
+                                            <button  onClick={() => deleteTodo(item.id)}>
+                                               
+                                                <span>  删除</span>
+                                            </button>
+                                        </div>
+                                        
                                     </div>
                                 )
                             }) 
@@ -87,8 +93,12 @@ function Todo () {
                     </div>
                 </div>
                 <div className='addTodo'>
-                    <input type="textarea" onInput={inputTodo} value={todo}/>
-                    <button onClick={addNewTodo}>添加代办</button>
+                    <div>
+                        <input placeholder='请输入待办' type="textarea" onInput={inputTodo} value={todo}/>
+                    </div>
+                    <button onClick={addNewTodo}>
+                        <span>添加代办</span><i></i>
+                    </button>
                 </div>
             </div>
         </div>
