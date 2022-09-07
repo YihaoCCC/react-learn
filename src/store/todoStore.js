@@ -4,7 +4,7 @@ import { makeAutoObservable } from "mobx";
 class Todo {
     todoList = [
         {
-            id: 1,
+            id: 0,
             content: '这-是系统内置的一个代办',
             time: '2022-08-06 20:02:00',
             name: 'Mr.Chen',
@@ -35,6 +35,10 @@ class Todo {
         return type === 'finish' ?  this.todoList.filter(item => item.isFinish) : this.todoList.filter(item => !item.isFinish)    
         // return newList
         // this.todoList = this.todoList.filter(item => !item.isFinish)
+    }
+
+    deleteStoreTodo (id) {
+        this.todoList = this.todoList.filter(item => item.id !== id)
     }
 
 

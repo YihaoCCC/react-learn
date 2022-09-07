@@ -30,14 +30,13 @@
         .rightContent {
             width: 78%;
             color: #fff;
+            height: 300px;
+            overflow: auto;
             .todoItem {
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
                 margin: 0 0 15px 0;
-                input {
-                    border-radius: 50%;
-                }
                 .itemBox {
                     display: flex;
                     flex-direction: column;

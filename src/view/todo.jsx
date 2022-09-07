@@ -42,6 +42,11 @@ function Todo () {
         todoStore.addTodo(newTodo)
         setId(id+1)
         getAll()
+        setTodo('')
+    }
+    const deleteTodo = (id) => {
+        todoStore.deleteStoreTodo(id)
+        getAll()
     }
     return(
         <div style={{width:"100%", background: '#333', height:'100vh'}}>
@@ -58,7 +63,7 @@ function Todo () {
                             TodoList.length !== 0 ?  TodoList.map((item,index) => {
                                 return (
                                     <div className='todoItem' key={index}>
-                                        <input type="checkbox" defaultChecked={item.isFinish} onClick={() => todoStore.changeStatus(item.id)}/>
+                                        <input type="checkbox" checked={item.isFinish} onChange={() => todoStore.changeStatus(item.id)}/>
                                         <div className='itemBox'>
                                             <p>{item.content}</p>
                                             <div className="sub">
@@ -68,6 +73,9 @@ function Todo () {
                                                 </span>                    
                                             </div>
                                         </div>
+                                        <button className='delete' onClick={() => deleteTodo(item.id)}>
+                                            删除
+                                        </button>
                                     </div>
                                 )
                             }) 
@@ -79,7 +87,7 @@ function Todo () {
                     </div>
                 </div>
                 <div className='addTodo'>
-                    <input type="textarea" onInput={inputTodo}/>
+                    <input type="textarea" onInput={inputTodo} value={todo}/>
                     <button onClick={addNewTodo}>添加代办</button>
                 </div>
             </div>
