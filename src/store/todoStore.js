@@ -18,6 +18,7 @@ class Todo {
 
     addTodo = (item) =>  {
         this.todoList.push(item)
+        console.log(this.todoList)
     }
 
     changeStatus (id) {
