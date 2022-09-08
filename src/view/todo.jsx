@@ -93,12 +93,12 @@ function Todo () {
                     </div>
                 </div>
                 <div className='addTodo'>
-                    <div>
-                        <input placeholder='请输入待办' type="textarea" onInput={inputTodo} value={todo}/>
-                    </div>
-                    <button onClick={addNewTodo}>
+                    <button onClick={addNewTodo} className='addButton'>
                         <span>添加代办</span><i></i>
                     </button>
+                    <div className='inputBox'>
+                        <input placeholder='请输入待办' type="textarea" onInput={inputTodo} value={todo}/>
+                    </div>   
                 </div>
             </div>
         </div>
