@@ -27,16 +27,17 @@ export default function App() {
     return (
         <>
             <Layout style={{height:"100vh"}}>
-                <Header className="header">
-                    <div className="logo" />
+                <Header className="header" >
+                    <div className="logo" style={{width:'200px'}} />
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
                 </Header>
-                <Layout>
-                    <Sider width={200}  theme='dark'>
+                <Layout >
+                    <Sider width={200} >
                         <Menu
+                            theme='dark'
                             mode="inline"
                             defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
+                            defaultOpenKeys={['sub1','sub2','sub3']}
                             style={{
                                 height: '100%',
                                 borderRight: 0,
