@@ -1,13 +1,23 @@
 import './login.scss';
 import { Button, Checkbox, Form, Input } from 'antd';
+import useStore  from '../store/index'
+import { useNavigate } from 'react-router-dom';
+import { notification } from 'antd'
 
 export default function Login() {
+    const router = useNavigate()
+    const { LoginStore }  = useStore()
     const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        LoginStore.setToken(values).then((res) => {
+            console.log('执行完毕')
+           
+            router('/')
+            notification['success']({
+                message: '欢迎您！',
+                description:
+                  '欢迎来到React ',
+            });
+        })
     };
     return (
         <div className="login">
@@ -17,6 +27,8 @@ export default function Login() {
                      onFinish={ onFinish }
                      initialValues={{
                         remember: true,
+                        mobile: '16622123425',
+                        code: '246810'
                       }}
                 >
                     <Form.Item
@@ -39,7 +51,7 @@ export default function Login() {
                           { required: true, message: '请输入验证码' }
                         ]}
                     >
-                        <Input size="large" placeholder="请输入验证码" />
+                        <Input  size="large" placeholder="请输入验证码" />
                     </Form.Item>
                     <Form.Item
                         name='remember'

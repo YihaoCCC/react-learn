@@ -16,7 +16,7 @@ class RootStroe {
         this.todoStore = new Todo()
     }
 }
-
+// 其实省略以下步骤直接导出此Store类也能直接使用，但是这时候react并不会收集依赖，即devtools监控不到数据，
 // 4：new instance of RootStore
 const rootStore = new RootStroe()
 // 5：introduce React.createContext to make rooteStore 

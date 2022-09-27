@@ -1,6 +1,7 @@
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, DiffOutlined, EditOutlined, LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
 const items1 = ['1', '2', '3'].map((key) => ({
     key,
@@ -24,26 +25,35 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, i
 
 
 export default function App() {
+    const route = useLocation()
     return (
         <>
             <Layout style={{height:"100vh"}}>
-                <Header className="header" >
-                    <div className="logo" style={{width:'200px'}} />
-                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
+                <Header className="header" style={{display:'flex',justifyContent:'flex-start',alignItems:'center'}}>
+                    <div style={{width:'160px',height:'100%',color:'#fff',fontSize:'26px',fontWeight:'bolder'}} className="logo">React CMS</div>
+                    <Menu  style={{width:'100%'}} theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
                 </Header>
                 <Layout >
                     <Sider width={200} >
                         <Menu
                             theme='dark'
                             mode="inline"
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1','sub2','sub3']}
+                            defaultSelectedKeys={route.pathname}
                             style={{
                                 height: '100%',
                                 borderRight: 0,
-                            }}
-                            items={items2}
-                        />
+                            }}                         
+                        >
+                            <Menu.Item icon={<HomeOutlined />} key="/">
+                                <Link to="/">数据概览</Link>
+                            </Menu.Item>
+                            <Menu.Item icon={<DiffOutlined />} key="/article">
+                                <Link to="/article">内容管理</Link>
+                            </Menu.Item>
+                            <Menu.Item icon={<EditOutlined />} key="/publish">
+                                <Link to="/publish">发布文章</Link>
+                            </Menu.Item>
+                        </Menu>
                     </Sider>
                     <Layout
                         style={{
@@ -65,9 +75,11 @@ export default function App() {
                                 padding: 24,
                                 margin: 0,
                                 minHeight: 280,
+                                borderRadius: 20,
+                                background: '#FFF'
                             }}
                         >
-                            Content
+                            <Outlet/>
                         </Content>
                         <Footer
                             style={{
