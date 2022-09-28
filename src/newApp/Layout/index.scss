@@ -1,0 +1,20 @@
+.userInfo {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        margin: 0 10px;
+    }
+    p {
+        width: 80px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+}

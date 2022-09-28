@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route}  from 'react-router-dom'
+import { unstable_HistoryRouter as HistoryRouter, Routes, Route}  from 'react-router-dom'
+import { history } from './utils/history.js'
 // import { Navigate } from 'react-router-dom'
 import Login from './Login/index.js'
 import Layout from './Layout/index.js'
@@ -9,7 +10,7 @@ import Home from './home/index.jsx'
 
 export default function App() {
     return (
-        <BrowserRouter>
+        <HistoryRouter history={history}>
             <Routes>
                 <Route path='/login' element={<Login/>}></Route>
                 {/* <Route path='/*' 
@@ -27,6 +28,6 @@ export default function App() {
                     <Route path='publish' element={<Publish></Publish>}></Route>
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </HistoryRouter>
     )
 }

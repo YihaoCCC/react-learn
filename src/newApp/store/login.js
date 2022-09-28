@@ -17,9 +17,13 @@ class LoginStore {
         }).then((res) => {
             this.token = res.data.token
             window.localStorage.setItem('react-token', this.token)
-            console.log(`output->`,this.token)
             return 1
         })
+    }
+
+    loginOut = () => {
+        this.token = ''
+        localStorage.removeItem('react-token')
     }
     
 }

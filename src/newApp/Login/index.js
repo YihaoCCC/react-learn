@@ -27,7 +27,7 @@ export default function Login() {
                      onFinish={ onFinish }
                      initialValues={{
                         remember: true,
-                        mobile: '16622123425',
+                        mobile: '13811111111',
                         code: '246810'
                       }}
                 >

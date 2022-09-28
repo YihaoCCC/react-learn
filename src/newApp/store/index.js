@@ -1,8 +1,10 @@
 import LoginStore from "./login";
+import UserStore from "./user";
 import React from "react";
 class Store  {
     constructor() {
         this.LoginStore = new LoginStore()
+        this.UserStore = new UserStore()
     }
 }
 
