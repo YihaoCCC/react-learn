@@ -5,22 +5,35 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import './index.scss'
 import { observer } from 'mobx-react-lite';
 import useStore from '../store';
-const { Header, Content, Footer, Sider } = Layout;
+import { useState, memo } from 'react';
+const { Header, Content, Sider } = Layout;
 const items1 = ['1', '2', '3'].map((key) => ({
     key,
     label: `nav ${key}`,
 }));
 
 
-function App() {
-    console.log('更新了组件');
+function App() {   
     const route = useLocation()
-    const {UserStore,LoginStore} = useStore()
+    const [currentRoute, setCurrentRoute] = useState('主页')
+    useEffect(() => {
+        if(route.pathname === '/article') {
+            setCurrentRoute('系统文章内容管理')    
+        } else if(route.search.length>0) {
+            setCurrentRoute('编辑文章')
+        }
+        else if(route.pathname === '/publish'){
+            setCurrentRoute('发布文章')
+        }  else {
+            setCurrentRoute('系统主页')
+        }
+    },[route.pathname])
+    const {UserStore,LoginStore, ChannelStore} = useStore()
     const router = useNavigate() 
     useEffect(() => {
         UserStore.getUserInfo()
-        console.log(UserStore.userInfo);
-    },[UserStore])
+        ChannelStore.getChannelList()
+    },[UserStore,ChannelStore])
     const confirm = (e) => {
         console.log(e);
         message.success('退出登录成功！');
@@ -56,7 +69,7 @@ function App() {
                         <Menu
                             theme='dark'
                             mode="inline"
-                            defaultSelectedKeys={route.pathname}
+                            selectedKeys={route.pathname}
                             style={{
                                 height: '100%',
                                 borderRight: 0,
@@ -83,9 +96,9 @@ function App() {
                                 margin: '16px 0',
                             }}
                         >
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
+                            <Breadcrumb.Item>React</Breadcrumb.Item>
+                            <Breadcrumb.Item>{currentRoute}</Breadcrumb.Item>
+                            
                         </Breadcrumb>
                         <Content
                             className="site-layout-background"
@@ -94,18 +107,13 @@ function App() {
                                 margin: 0,
                                 minHeight: 280,
                                 borderRadius: 20,
-                                background: '#FFF'
+                                background: '#FFF',
+                                overflow: 'auto'
                             }}
                         >
                             <Outlet/>
                         </Content>
-                        <Footer
-                            style={{
-                            textAlign: 'center',
-                            }}
-                        >
-                            Ant Design ©2018 Created by Ant UED CYH
-                        </Footer>
+                       
                     </Layout>
                 </Layout>
             </Layout>
@@ -113,4 +121,4 @@ function App() {
     )
 }
 
-export default observer(App)
+export default memo(observer(App))

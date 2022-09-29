@@ -8,9 +8,7 @@ export default function Login() {
     const router = useNavigate()
     const { LoginStore }  = useStore()
     const onFinish = (values) => {
-        LoginStore.setToken(values).then((res) => {
-            console.log('执行完毕')
-           
+        LoginStore.setToken(values).then((res) => {        
             router('/')
             notification['success']({
                 message: '欢迎您！',

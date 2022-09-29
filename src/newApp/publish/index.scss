@@ -1,0 +1,17 @@
+.publish {
+  position: relative;
+}
+
+.ant-upload-list {
+  .ant-upload-list-picture-card-container,
+  .ant-upload-select {
+    width: 106px;
+    height: 106px;
+  }
+}
+
+.publish-quill {
+    .ql-editor {
+      min-height: 200px;
+    }
+  }

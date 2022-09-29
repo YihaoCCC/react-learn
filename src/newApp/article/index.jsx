@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { Card, Breadcrumb, Form, Button, Radio, DatePicker, Select, Table, Tag, Space } from 'antd'
+import { Card, Form, Button, Radio, DatePicker, Select, Table, Tag, Space } from 'antd'
 import {  DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import 'moment/locale/zh-cn'
 import locale from 'antd/es/date-picker/locale/zh_CN'
@@ -8,23 +7,26 @@ import './index.scss'
 
 import { useState, useEffect } from 'react'
 import { http } from '../request';
+import { observer } from 'mobx-react-lite';
+import { history } from '../utils/history';
+import useStore from '../store';
 
 const { Option } = Select
 const { RangePicker } = DatePicker
-const onFinish = (value) => {
-    console.log(value);
-}
+
 const Article = () => {
     const img404 = 'https://135.com/cn/123123,png'
-    // 获取频道列表
-    const [channels, setChannels] = useState([])
-    async function fetchChannels() {
-        const res = await http.get('/channels')
-        setChannels(res.data.channels)
-    }
-    useEffect(() => {
-        fetchChannels()
-    }, [])
+    const {ChannelStore} = useStore()
+    // 已封装进store 在layout中执行
+    // // 获取频道列表
+    // const [channels, setChannels] = useState([])
+    // async function fetchChannels() {
+    //     const res = await http.get('/channels')
+    //     setChannels(res.data.channels)
+    // }
+    // useEffect(() => {
+    //     fetchChannels()
+    // }, [])
 
     // 文章列表数据管理
     const [article, setArticleList] = useState({
@@ -56,13 +58,32 @@ const Article = () => {
           }
         fetchArticleList()
     }, [params])
+    const onFinish = (value) => {
+        console.log(value);const { status, channel_id, date } = value
+        // 格式化表单数据
+        const _params = {}
+        // 格式化status
+        _params.status = status
+        if (channel_id) {
+          _params.channel_id = channel_id
+        }
+        if (date) {
+          _params.begin_pubdate = date[0].format('YYYY-MM-DD')
+          _params.end_pubdate = date[1].format('YYYY-MM-DD')
+        }
+        // 修改params参数 触发接口再次发起
+        setParams({
+           ...params,
+           ..._params
+        })
+    }
     const columns = [
         {
           title: '封面',
           dataIndex: 'cover',
           width:120,
           render: cover => {
-            return <img src={cover || img404} width={80} height={60} alt="" />
+            return <img src={cover.images[0] || img404} width={80} height={60} alt="" />
           }
         },
         {
@@ -96,7 +117,7 @@ const Article = () => {
           render: data => {
             return (
               <Space size="middle">
-                <Button type="primary" shape="circle" icon={<EditOutlined />} />
+                <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={() => history.push(`/publish?id=${data.id}`)}/>
                 <Button
                   type="primary"
                   danger
@@ -108,38 +129,13 @@ const Article = () => {
           }
         }
       ]
-    
-      const data = [
-          {
-              id: '8218',
-              comment_count: 0,
-              cover: {
-                images:['http://geek.itheima.net/resources/images/15.jpg'],
-              },
-              like_count: 0,
-              pubdate: '2019-03-11 09:00:00',
-              read_count: 2,
-              status: 2,
-              title: 'wkwebview离线化加载h5资源解决方案' 
-          }
-      ]
   return (
     <div>
-      <Card
-        title={
-          <Breadcrumb separator=">">
-            <Breadcrumb.Item>
-              <Link to="/home">首页</Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>内容管理</Breadcrumb.Item>
-          </Breadcrumb>
-        }
-        style={{ marginBottom: 20 }}
-      >
-        <Form initialValues={{ status: 9 }} onFinish={onFinish}>
+      <Card>
+        <Form initialValues={{ status: '' }} onFinish={onFinish}>
           <Form.Item label="状态" name="status">
             <Radio.Group>
-              <Radio value={9}>全部</Radio>
+              <Radio value={''}>全部</Radio>
               <Radio value={0}>草稿</Radio>
               <Radio value={1}>待审核</Radio>
               <Radio value={2}>审核通过</Radio>
@@ -153,7 +149,7 @@ const Article = () => {
               style={{ width: 120 }}
             >
               {
-                channels.map((item,index) => {
+                ChannelStore.ChannelList.map((item,index) => {
                     return <Option key={item.id} value={item.id}>{item.name}</Option>
                 })
               }
@@ -172,11 +168,11 @@ const Article = () => {
           </Form.Item>
         </Form>
       </Card>
-      <Card title={`根据筛选条件共查询到 count 条结果：`}>
-        <Table rowKey="id" columns={columns} dataSource={data} />
+      <Card title={`根据筛选条件共查询到 ${article.count} 条结果：`}>
+        <Table rowKey="id" columns={columns} dataSource={article.list} />
       </Card>
     </div>
   )
 }
 
-export default Article
+export default observer(Article) 
